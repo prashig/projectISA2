@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_SESSION['user_id'];
 
     // Check if class exists and get the creator's ID
-    $query = "SELECT id, created_by FROM classes WHERE classCode = ?";
+    $query = "SELECT c_id, created_by FROM classes WHERE classCode = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $classCode);
     $stmt->execute();
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        $class_id = $row['id'];
+        $class_id = $row['c_id'];
         $creator_id = $row['created_by'];
 
         // Prevent the creator from joining their own class

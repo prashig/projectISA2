@@ -23,7 +23,7 @@ if (!$class) {
 $isCreator = ($class['created_by'] == $user_id);
 
 // Check if the user has joined the class
-$query = "SELECT * FROM class_members WHERE user_id = '$user_id' AND class_id = '{$class['id']}'";
+$query = "SELECT * FROM class_members WHERE user_id = '$user_id' AND class_id = '{$class['c_id']}'";
 $result = $conn->query($query);
 $isMember = $result->num_rows > 0;
 ?>

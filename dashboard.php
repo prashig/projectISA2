@@ -61,27 +61,7 @@ header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
         </div>
     </nav>
     <!-- ends -->
-    <?php
-  
-
-    $user_id = $_SESSION['user_id'];
-
-    // Fetch created classes
-    $query_created = "SELECT * FROM classes WHERE created_by = ?";
-    $stmt = $conn->prepare($query_created);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result_created = $stmt->get_result();
-
-    // Fetch joined classes
-    $query_joined = "SELECT c.* FROM class_members cm 
-                 JOIN classes c ON cm.class_id = c.id 
-                 WHERE cm.user_id = ?";
-    $stmt = $conn->prepare($query_joined);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result_joined = $stmt->get_result();
-    ?>
+    
 <div class="container mt-5 pt-5">
     <h2 class="mt-5 mb-3">Classes You Created</h2>
     <div class="list-group">
@@ -104,7 +84,7 @@ header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
         <?php
         // Fetch classes the user has joined
         $query = "SELECT c.* FROM class_members cm 
-                  JOIN classes c ON cm.class_id = c.id 
+                  JOIN classes c ON cm.class_id = c.c_id 
                   WHERE cm.user_id = '$user_id'";
         $result = $conn->query($query);
 
