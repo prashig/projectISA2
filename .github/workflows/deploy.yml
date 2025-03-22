@@ -1,19 +1,18 @@
-name: 🚀 Deploy to InfinityFree
+name: Deploy Files to InfinityFree
 
 on:
   push:
     branches:
-      - main  # Change to your default branch if different
+      - main  # Change if your branch is different
 
 jobs:
-  deploy:
-    name: FTP Deploy
+  ftp-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 📂 Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: 🚀 Deploy Files to InfinityFree
+      - name: Deploy Files to InfinityFree
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_HOST }}
