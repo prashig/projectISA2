@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!isset($_POST["classId"]) || empty($_POST["classId"])) {
-        echo json_encode(["success" => false, "message" => "❌ Class ID is missing in request!"]);
+        echo json_encode(["success" => false, "message" => " Class ID is missing !"]);
         exit();
     }
 
