@@ -13,19 +13,7 @@
     <div class="form-box">
         <div class="form ">
             <div class="form-content">
-                <!-- <form action="signup.php" method="post" >
-                <h2>Sign Up</h2>
-                <input type="text" name="name"   placeholder="Name">
-                <br><br>
-                <input type="email" name="email" placeholder="email">
-                <br><br>
-               
-                <input type="password" name="ct" placeholder="password">
-                <br><br>
-                
-                <input type="submit" value="Sign Up" class="btn">
-                <p>already a user?<a href="index.php">Log In</a></p>
-            </form > -->
+          
                 <form action="server.php" method="post">
                     <h2>Sign Up</h2>
                     <input type="text" name="name" placeholder="Name" required><br><br>

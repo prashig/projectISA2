@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2025 at 07:31 PM
+-- Generation Time: Mar 24, 2025 at 09:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,8 @@ INSERT INTO `classes` (`c_id`, `className`, `classCode`, `created_by`) VALUES
 (8, 'science', '83911A', 3),
 (9, 'english1', 'C254BC', 4),
 (10, 'science', '5EFDAC', 4),
-(11, 'php course', '61F896', 5);
+(11, 'php course', '61F896', 5),
+(12, 'Anatomy', '179B60', 6);
 
 -- --------------------------------------------------------
 
@@ -64,21 +65,10 @@ CREATE TABLE `class_members` (
 --
 
 INSERT INTO `class_members` (`id`, `user_id`, `class_id`, `joined_at`) VALUES
-(1, 5, 8, '2025-03-22 18:28:52');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `files`
---
-
-CREATE TABLE `files` (
-  `id` int(11) NOT NULL,
-  `filename` varchar(255) NOT NULL,
-  `filepath` varchar(255) NOT NULL,
-  `uploaded_by` int(11) NOT NULL,
-  `uploaded_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(1, 5, 8, '2025-03-22 18:28:52'),
+(2, 5, 6, '2025-03-24 03:34:15'),
+(3, 6, 11, '2025-03-24 06:59:13'),
+(4, 5, 12, '2025-03-24 07:48:26');
 
 -- --------------------------------------------------------
 
@@ -100,8 +90,10 @@ CREATE TABLE `notes` (
 --
 
 INSERT INTO `notes` (`noteId`, `noteTitle`, `filePath`, `uploadedBy`, `classId`, `uploadDate`) VALUES
-(4, 'unit 1', 'uploads/new22.pdf', 4, 9, '2025-03-22 05:54:58'),
-(5, 'test', 'uploads/new22.pdf', 4, 9, '2025-03-22 06:12:48');
+(6, 'contact design', 'uploads/contact pg.png', 5, 11, '2025-03-24 04:12:51'),
+(10, 'colour palette', 'uploads/WhatsApp Image 2025-03-21 at 23.06.42_7d2ebf37.jpg', 5, 11, '2025-03-24 05:53:33'),
+(11, 'home pg design', 'uploads/1.png', 5, 11, '2025-03-24 06:06:12'),
+(28, 'footer', 'uploads/4.png', 5, 11, '2025-03-24 06:21:39');
 
 -- --------------------------------------------------------
 
@@ -125,7 +117,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
 (2, 'sam', 'sam@gmail.com', '$2y$10$76CyrpWK52xUp7cQO.Azs.NdTt2JaeTyGM6PFER4ZEFQf5b7DVwqu'),
 (3, 'sameena', 's@gmail.com', '$2y$10$2WWgCAJd7RpiomrWAClNK.Xd9Mt/JaB1P3DK6HuhrT7amlPUe//SC'),
 (4, 'amna', 'am@gmail.com', '$2y$10$BIh3/0QzEmT3GFh0bedtDuFrMpLYoXZWVilIYbYFMaeo3St3gbnKi'),
-(5, 'preet', 'preetgaude@gmail.com', '$2y$10$PlLCih/6t.P7gnwtBhLDdOBJW3ZhSEmRyfuYsor7Zop5BBAx5fAUy');
+(5, 'preet', 'preetgaude@gmail.com', '$2y$10$PlLCih/6t.P7gnwtBhLDdOBJW3ZhSEmRyfuYsor7Zop5BBAx5fAUy'),
+(6, 'presha', 'bh@gmail', '$2y$10$lBnR3iX810nMTkzEWRepKuP0cG/KnApIAyARAhurIeffNVbxJK/pO');
 
 --
 -- Indexes for dumped tables
@@ -146,12 +139,6 @@ ALTER TABLE `class_members`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `class_id` (`class_id`);
-
---
--- Indexes for table `files`
---
-ALTER TABLE `files`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `notes`
@@ -176,31 +163,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `class_members`
 --
 ALTER TABLE `class_members`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `files`
---
-ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `noteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `noteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

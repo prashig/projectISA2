@@ -65,7 +65,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <h2>Join a Class</h2>
+<style>
+        body {
+            background-color: #f8f9fa; 
+        }
+        h2{
+            color:#455763;
+            align-items: center;
+        }
+        .form {
+            background-color: #e4caa4; 
+            padding: 20px;
+            border-radius: 8px;
+            
+            max-width: 400px;
+            margin: auto;
+        }
+        .colorbtn {
+            background-color: #455763; 
+            color: white;
+            border: none;
+            margin:5px;
+            border-radius:3px;
+            padding: 5px;
+        }
+        .colorbtn:hover {
+            background-color:rgb(141, 192, 221); 
+        }
+        .dashbtn{
+            background:#455763;
+            padding:15px;
+            border-radius:10px;
+            border: none;
+            color:white;
+            margin:20px;
+        }
+       
+    </style>
+
+  
 
     <?php
     if (isset($_SESSION["success"])) {
@@ -78,15 +116,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     ?>
 
-    <form class="formjoin" action="joinClass.php" method="post">
+    <form class="form" action="joinClass.php" method="post">
+    <h3 class="mb-3 text-center">Join</h3>
         <label for="classcode">Class Code:</label>
         <input type="text" id="classcode" name="classcode" required>
         <br><br>
-        <button type="submit">Join Class</button>
+        <button type="submit"class="btn colorbtn w-100">Join Class</button>
     </form>
 
+
+
     <br>
-    <a href="dashboard.php">Back</a>
+    <button type="button" class="btn dashbtn w-100" onclick="window.location.href='dashboard.php'">Go to Dashboard</button>
+
 </body>
 
 </html>

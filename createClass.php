@@ -2,7 +2,7 @@
 
 <?php
 
-session_start();
+
 include 'server.php'; 
 
 
@@ -108,12 +108,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     </form>
 
-    <!-- <form method="POST" action="createClass.php">
-        <label for="classname">Class Name:</label>
-        <input type="text" id="classname" name="classname" required>
-        <br><br>
-        <button type="submit">Create Class</button>
-    </form> -->
     <button type="button" class="btn dashbtn w-100" onclick="window.location.href='dashboard.php'">Go to Dashboard</button>
 
     

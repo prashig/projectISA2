@@ -2,7 +2,7 @@
 include 'server.php';
 
 if (!isset($_GET["classId"]) || empty($_GET["classId"])) {
-    die(json_encode(["success" => false, "message" => " Error: Class ID is missing!"]));
+    die("⚠️ Error: Class ID is missing from the URL!");
 }
 
 $classId = intval($_GET["classId"]);
@@ -10,7 +10,7 @@ $classId = intval($_GET["classId"]);
 $query = "SELECT noteTitle, filePath FROM notes WHERE classId = ?";
 $stmt = $conn->prepare($query);
 if (!$stmt) {
-    die(json_encode(["success" => false, "message" => "Database query preparation failed!"]));
+    die("⚠️ Database query preparation failed!");
 }
 $stmt->bind_param("i", $classId);
 $stmt->execute();
@@ -23,10 +23,79 @@ while ($row = $result->fetch_assoc()) {
         "path" => htmlspecialchars($row['filePath'])
     ];
 }
-
-if (empty($notes)) {
-    echo json_encode(["success" => false, "message" => "No notes found for this class."]);
-} else {
-    echo json_encode(["success" => true, "notes" => $notes]);
-}
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Notes</title>
+    <link rel="stylesheet" href="style1.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #e4caa4;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 50%;
+        }
+        h2 {
+            color: #455763;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            background-color: #455763;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background 0.3s ease-in-out;
+        }
+        .btn:hover {
+            background-color: #2e3f4c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Class Notes</h2>
+        <?php if (empty($notes)): ?>
+            <p style="color: red;">No notes found for this class.</p>
+        <?php else: ?>
+            <ul>
+                <?php foreach ($notes as $note): ?>
+                    <li>
+                        📄 <a href="<?php echo $note['path']; ?>" download><?php echo $note['title']; ?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+        <br>
+        <a href="dashboard.php" class="btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>

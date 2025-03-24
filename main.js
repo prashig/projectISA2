@@ -1,78 +1,46 @@
-
 $(document).ready(function () {
-    console.log("jQuery Loaded ");
+    console.log("jQuery Loaded");
 
     var classId = $("#classId").val();
-    console.log("Debug: classId =", classId); 
+    console.log("Debug: classId =", classId);
 
     if (!classId || classId.trim() === "") {
-        $("#message").html("<p style='color: red;'> No Class ID found! Notes may not load properly.</p>");
-        return; 
+        $("#message").html("<p style='color: red;'>No Class ID found! Notes may not load properly.</p>");
+        return;
     }
 
-    loadNotes(); 
-
-    $("#uploadNoteForm").submit(function (e) {
-        e.preventDefault();
-        var formData = new FormData(this);
-        formData.append("classId", classId);
-
-        $.ajax({
-            url: "uploadNotes.php",
-            type: "POST",
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                console.log(" Upload Response:", response);
-                try {
-                    var res = JSON.parse(response);
-                    if (res.success) {
-                        $("#message").html('<p style="color: green;">' + res.message + '</p>');
-                        $("#uploadNoteForm")[0].reset();
-                        loadNotes();
-                    } else {
-                        $("#message").html('<p style="color: red;">' + res.message + '</p>');
-                    }
-                } catch (error) {
-                    console.log(" JSON Parse Error:", error);
-                }
-            },
-            error: function () {
-                alert(" Upload failed!");
-            }
-        });
-    });
+    loadNotes();
+   
 
     function loadNotes() {
         $.ajax({
             url: "fetchNotes.php?classId=" + classId,
             type: "GET",
             success: function (response) {
-                console.log(" Fetch Response:", response);
+                console.log("Fetch Response:", response);
                 try {
                     var data = JSON.parse(response);
                     if (data.success) {
-                        let notesHtml = "<h3>Uploaded Notes</h3>";
+                        let notesHtml = "<h3>Uploaded Notes</h3><ul>";
                         data.notes.forEach(note => {
-                            notesHtml += `<p><a href="${note.path}" download>${note.title}</a></p>`;
+                            notesHtml += `<li>📄 <a href="${note.path}" download>${note.title}</a></li>`;
                         });
+                        notesHtml += "</ul>";
                         $("#notesList").html(notesHtml);
                     } else {
                         $("#notesList").html(`<p style="color: red;">${data.message}</p>`);
                     }
                 } catch (error) {
-                    console.log(" JSON Parse Error:", error);
+                    console.log("JSON Parse Error:", error);
+                    $("#notesList").html('<p style="color: red;">Error loading notes.</p>');
                 }
             },
             error: function () {
-                console.log(" Error fetching notes.");
-                alert("Error fetching notes.");
+                console.log("Error fetching notes.");
+                $("#notesList").html('<p style="color: red;">Error fetching notes.</p>');
             }
         });
     }
-
-   
 
     $('#createClassForm').submit(function (e) {
         e.preventDefault();
