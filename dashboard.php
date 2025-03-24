@@ -9,14 +9,14 @@ if (!isset($_SESSION["user_id"])) {
 $user_id = $_SESSION['user_id'];
 $user_name = isset($_SESSION["user_name"]) ? htmlspecialchars($_SESSION["user_name"]) : "User";
 
-// Get the user's created classes
+// get the user's created classes
 $query_created = "SELECT className, classCode FROM classes WHERE created_by = ?";
 $stmt = $conn->prepare($query_created);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result_created = $stmt->get_result();
 
-// Get the user's joined classes
+// get the user's joined classes
 
 $query_joined = "SELECT c.className, c.classCode FROM class_members cm 
                  JOIN classes c ON cm.class_id = c.c_id WHERE cm.user_id = ?";

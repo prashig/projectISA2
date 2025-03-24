@@ -1,5 +1,3 @@
-
-
 <?php
 
 
@@ -11,9 +9,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// do class creation wh d form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //  get d class name from d form
     $className = trim($_POST['classname']); 
     $classCode = strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 6)); 
     // Get the logged-in user's ID
@@ -27,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Store the class code
         $_SESSION["class_code"] = $classCode; 
     } else {
-        // show error message if class creation fails
         $_SESSION["error"] = "Error creating class: " . $conn->error; 
     }
 }

@@ -23,11 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $class_id = $row['c_id'];
         $creator_id = $row['created_by'];
 
-        // Prevent the creator from joining their own class
+        // prevent the creator from joining their own class
         if ($user_id == $creator_id) {
             $_SESSION["error"] = "You are the creator of this class and cannot join as a member!";
         } else {
-            // Check if user is already in the class
+            // check if user is already in the class
             $check_query = "SELECT * FROM class_members WHERE user_id = ? AND class_id = ?";
             $stmt = $conn->prepare($check_query);
             $stmt->bind_param("ii", $user_id, $class_id);
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $check_result = $stmt->get_result();
 
             if ($check_result->num_rows == 0) {
-                // Add user to the class
+                // add user to the class
                 $insert_query = "INSERT INTO class_members (user_id, class_id) VALUES (?, ?)";
                 $stmt = $conn->prepare($insert_query);
                 $stmt->bind_param("ii", $user_id, $class_id);

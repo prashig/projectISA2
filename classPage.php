@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 $classCode = $_GET['classCode'] ?? '';
 $user_id = $_SESSION['user_id'];
 
-// Fetch class details
+// fetch class details
 $query = "SELECT * FROM classes WHERE classCode = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("s", $classCode);
@@ -21,12 +21,12 @@ if (!$class) {
     die("Class not found!");
 }
 
-$classId = $class['c_id']; // Fetch correct class ID
+$classId = $class['c_id']; // fetch correct class ID
 
 // Check if the user is the creator
 $isCreator = ($class['created_by'] == $user_id);
 
-// Check if the user has joined the class
+// check if the user has joined the class
 $query = "SELECT * FROM class_members WHERE user_id = ? AND class_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("ii", $user_id, $classId);

@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $filePath = "uploads/" . basename($_FILES["noteFile"]["name"]);
     move_uploaded_file($_FILES["noteFile"]["tmp_name"], $filePath);
 
-    // Insert into database
+    // insert into database
     $stmt = $conn->prepare("INSERT INTO notes (noteTitle, filePath, uploadedBy, classId) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssii", $noteTitle, $filePath, $uploadedBy, $classId);
 

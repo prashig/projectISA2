@@ -8,7 +8,7 @@ if (!isset($_GET["classId"]) || empty($_GET["classId"])) {
 $classId = intval($_GET["classId"]);
 $user_id = $_SESSION['user_id'];
 
-// Fetch class details
+// fetch class details
 $query = "SELECT created_by FROM classes WHERE c_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $classId);
@@ -22,7 +22,7 @@ if (!$class) {
 
 $isCreator = ($class['created_by'] == $user_id);
 
-// Fetch notes for the class
+// fetch notes for the class
 $query = "SELECT noteId, noteTitle, filePath FROM notes WHERE classId = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $classId);
@@ -103,7 +103,7 @@ $notes = $result->fetch_all(MYSQLI_ASSOC);
             <ul>
                 <?php foreach ($notes as $note): ?>
                     <li>
-                        📄 <a href="<?php echo $note['filePath']; ?>" download><?php echo $note['noteTitle']; ?></a>
+                         <a href="<?php echo $note['filePath']; ?>" download><?php echo $note['noteTitle']; ?></a>
                         <?php if ($isCreator): ?>
                             <form action="deleteNote.php" method="post" style="display:inline;">
                                 <input type="hidden" name="noteId" value="<?php echo $note['noteId']; ?>">

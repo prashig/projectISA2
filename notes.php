@@ -1,13 +1,13 @@
 <?php
-include 'server.php'; // Ensure this connects to the database
+include 'server.php'; 
 
 if (!isset($_GET['classCode'])) {
-    die("⚠️ Error: Class Code is missing from the URL!");
+    die(" Error: Class Code is missing from the URL!");
 }
 
 $classCode = $_GET['classCode'];
 
-// Fetch the corresponding class ID
+// fetch corresponding class ID
 $stmt = $conn->prepare("SELECT c_id FROM classes WHERE classCode = ?");
 $stmt->bind_param("s", $classCode);
 $stmt->execute();
@@ -16,7 +16,7 @@ $classRow = $result->fetch_assoc();
 $classId = $classRow ? $classRow['c_id'] : null;
 
 if (!$classId) {
-    die("⚠️ Error: No class found for this Class Code!");
+    die(" Error: No class found for this Class Code!");
 }
 ?>
 
@@ -46,21 +46,21 @@ if (!$classId) {
                         try {
                             var res = JSON.parse(response);
                             if (res.success) {
-                                $("#message").html('<p style="color: green; font-size: 18px;">✔️ File uploaded successfully!</p>');
-                                $("#uploadNoteForm")[0].reset(); // Clear fields
+                                $("#message").html('<p style="color: green; font-size: 18px;">File uploaded successfully!</p>');
+                                $("#uploadNoteForm")[0].reset();
                                 setTimeout(function () {
-                                    $("#message").html(""); // Clear message after 2 sec
+                                    $("#message").html(""); // clear message after 2 sec
                                 }, 2000);
                             } else {
-                                $("#message").html('<p style="color: red;">❌ ' + res.message + '</p>');
+                                $("#message").html('<p style="color: red;"> ' + res.message + '</p>');
                             }
                         } catch (error) {
                             console.log("JSON Parse Error:", error);
-                            $("#message").html('<p style="color: red;">❌ Error processing request.</p>');
+                            $("#message").html('<p style="color: red;"> Error processing request.</p>');
                         }
                     },
                     error: function () {
-                        $("#message").html('<p style="color: red;">❌ Upload failed! Please try again.</p>');
+                        $("#message").html('<p style="color: red;"> Upload failed! Please try again.</p>');
                     }
                 });
             });

@@ -2,17 +2,18 @@
 session_start();
 
 // Hosting Database Credentials
-$servername = "sql103.infinityfree.com"; // Your hosting SQL server
-$username = "if0_38576566"; // Your InfinityFree username
-$password = "pwdJXUKBnpjCiHS"; // Your MySQL password
-$dbname = "if0_38576566_user_db"; // Your database name
+$servername = "sql103.infinityfree.com"; 
+$username = "if0_38576566"; 
+$password = "pwdJXUKBnpjCiHS"; 
+$dbname = "if0_38576566_user_db";
+
 // Database Connection
 // $conn = new mysqli("localhost", "root", "", "user_db");
 
 // Connect to the database
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
+// check connection
 if ($conn->connect_error) {
     die(" Connection failed: " . $conn->connect_error);
 }
@@ -21,7 +22,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["signup"])) {
     $name = trim($_POST["name"]);
     $email = trim($_POST["email"]);
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Hash Password
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT); 
 
     // Check if email already exists
     $check_stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");

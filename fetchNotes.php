@@ -2,7 +2,7 @@
 include 'server.php';
 
 if (!isset($_GET["classId"]) || empty($_GET["classId"])) {
-    die("⚠️ Error: Class ID is missing from the URL!");
+    die(" Error: Class ID is missing from the URL!");
 }
 
 $classId = intval($_GET["classId"]);
@@ -10,7 +10,7 @@ $classId = intval($_GET["classId"]);
 $query = "SELECT noteTitle, filePath FROM notes WHERE classId = ?";
 $stmt = $conn->prepare($query);
 if (!$stmt) {
-    die("⚠️ Database query preparation failed!");
+    die(" Database query preparation failed!");
 }
 $stmt->bind_param("i", $classId);
 $stmt->execute();
@@ -89,7 +89,7 @@ while ($row = $result->fetch_assoc()) {
             <ul>
                 <?php foreach ($notes as $note): ?>
                     <li>
-                        📄 <a href="<?php echo $note['path']; ?>" download><?php echo $note['title']; ?></a>
+                         <a href="<?php echo $note['path']; ?>" download><?php echo $note['title']; ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
